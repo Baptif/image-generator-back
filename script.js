@@ -1,4 +1,6 @@
 const API_TOKEN = "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";
+const API_URL = "https://api-inference.huggingface.co/models/";
+const MODEL = "prompthero/openjourney";
 
 const maxImages = 4; //Number of images that will be generated
 let selectedImageNumber = null;
@@ -25,10 +27,12 @@ function clearImageGrid(){
 
 // Function to download generated images
 function downloadImage(imgUrl, imageNumber){
+    const today = new Date().toLocaleString('en-GB').replace(", ","-");
+
     const link = document.createElement("a");
     link.href = imgUrl;
     // Set filename based on the selected image
-    link.download = `image-${imageNumber + 1}.jpg`;
+    link.download = `image${imageNumber + 1}-${today}.jpg`;
     link.click();
 }
 
@@ -43,12 +47,12 @@ async function generateImages(input){
     const imageUrls = [];
 
     for(let i = 0; i < maxImages; i++){
-        const randomNumber = getRandomNumber(1, 100);
+        const randomNumber = getRandomNumber(1, 1000);
         // Random number is added to the prompt to create different results each time
         const prompt = `${input} ${randomNumber}`;
 
         const response = await fetch(
-            "https://api-inference.huggingface.co/models/prompthero/openjourney",
+            API_URL+MODEL,
             {
                 headers: { 
                     "Content-Type": "application\json",
@@ -82,5 +86,17 @@ async function generateImages(input){
 
 document.getElementById("generate").addEventListener("click", () => {
     const input = document.getElementById("user-prompt").value;
-    generateImages(input);
+    if(input){
+        generateImages(input);
+    }
+    else{
+        alert("Type a prompt before generating 😬");
+    }
+});
+
+document.getElementById("user-prompt").addEventListener("keypress", function(event) {
+    if (event.key === "Enter"){
+        event.preventDefault();
+        document.getElementById("generate").click();
+    }
 });
