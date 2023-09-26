@@ -3,7 +3,6 @@ const API_URL = "https://api-inference.huggingface.co/models/";
 const MODEL = "prompthero/openjourney";
 
 const maxImages = 4; //Number of images that will be generated
-let selectedImageNumber = null;
 
 // Function to generate a random number between min and max (include)
 function getRandomNumber(min, max){
@@ -23,6 +22,13 @@ function enableGenerateButton(){
 // Function to clear image grid
 function clearImageGrid(){
     document.getElementById("image-grid").innerHTML = "";
+}
+
+// Function to show the snackbars
+function showSnackbar(type) {
+    let snackbar = document.getElementById("snackbar-"+type);
+    snackbar.className += " show";
+    setTimeout(function(){ snackbar.className = snackbar.className.replace(" show", ""); }, 3000);
 }
 
 // Function to download generated images
@@ -45,6 +51,7 @@ async function generateImages(input){
     loading.style.display = "block";
 
     const imageUrls = [];
+    let imagesError = false;
 
     for(let i = 0; i < maxImages; i++){
         const randomNumber = getRandomNumber(1, 1000);
@@ -64,24 +71,27 @@ async function generateImages(input){
         );
 
         if(!response.ok){
-            alert("Failed to generate images 🚫");
+            imagesError = true;
+        }else{
+            // Creating the url to download the images from
+            const blob = await response.blob();
+            const imageUrl = URL.createObjectURL(blob);
+            imageUrls.push(imageUrl);
+            // Adding images to the screen
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = `art-${i + 1}`;
+            img.onclick = () => downloadImage(imageUrl, i);
+            document.getElementById("image-grid").appendChild(img);
         }
+    }
 
-        const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
-        imageUrls.push(imageUrl);
-
-        const img = document.createElement("img");
-        img.src = imageUrl;
-        img.alt = `art-${i + 1}`;
-        img.onclick = () => downloadImage(imageUrl, i);
-        document.getElementById("image-grid").appendChild(img);
+    if(imagesError){
+        showSnackbar("danger");
     }
 
     loading.style.display = "none";
     enableGenerateButton();
-
-    selectedImageNumber = null; // Reset selected image number
 }
 
 document.getElementById("generate").addEventListener("click", () => {
@@ -90,7 +100,7 @@ document.getElementById("generate").addEventListener("click", () => {
         generateImages(input);
     }
     else{
-        alert("Type a prompt before generating 😬");
+        showSnackbar("warning");
     }
 });
 
