@@ -1,6 +1,6 @@
 const API_TOKEN = "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";
 const API_URL = "https://api-inference.huggingface.co/models/";
-const MODEL = "prompthero/openjourney";
+const MODEL = "stabilityai/stable-diffusion-xl-base-1.0";
 
 const maxImages = 4; //Number of images that will be generated
 
@@ -54,7 +54,7 @@ async function generateImages(input){
     let imagesError = false;
 
     for(let i = 0; i < maxImages; i++){
-        const randomNumber = getRandomNumber(1, 1000);
+        const randomNumber = getRandomNumber(1, 10000);
         // Random number is added to the prompt to create different results each time
         const prompt = `${input} ${randomNumber}`;
 

@@ -20,6 +20,33 @@ body{
     min-height: 100vh;
 }
 
+.navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 30px;
+    z-index: 1000;
+}
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    float: right;
+}
+
+.nav li{
+    list-style: none;
+    padding: 0 6px;
+    font-size: 32px;
+    transition: 0.3s ease;
+}
+.nav li:hover{
+    transform: scale(1.2);
+}
+.nav a{
+    text-decoration: none;
+}
+
 .container{
     position: relative;
     margin-top: 15px;
