@@ -77,12 +77,23 @@ async function generateImages(input){
             const blob = await response.blob();
             const imageUrl = URL.createObjectURL(blob);
             imageUrls.push(imageUrl);
+            // Creating image divs
+            const div = document.createElement("div");
+
+            const icon = document.createElement("i");
+            icon.className = "material-icons";
+            icon.innerHTML = "add_circle";
+
+            div.appendChild(icon);
             // Adding images to the screen
             const img = document.createElement("img");
             img.src = imageUrl;
             img.alt = `art-${i + 1}`;
             img.onclick = () => downloadImage(imageUrl, i);
-            document.getElementById("image-grid").appendChild(img);
+
+            div.appendChild(img);
+
+            document.getElementById("image-grid").appendChild(div);
         }
     }
 
