@@ -42,6 +42,21 @@ function downloadImage(imgUrl, imageNumber){
     link.click();
 }
 
+function likeImage(imgUrl, imageNumber){
+    const likeButton = document.getElementById(`like-${imageNumber}`);
+    likeButton.innerHTML = "check_circle";
+    console.log(imgUrl)
+    // stocker dans localsotrage
+    likeButton.onclick = () => unlikeImage(imgUrl, imageNumber);
+}
+
+function unlikeImage(imgUrl, imageNumber){
+    const likeButton = document.getElementById(`like-${imageNumber}`);
+    likeButton.innerHTML = "add_circle";
+    // enlever du localsotrage
+    likeButton.onclick = () => likeImage(imgUrl, imageNumber);
+}
+
 // Function to generate images
 async function generateImages(input){
     disableGenerateButton();
@@ -81,8 +96,10 @@ async function generateImages(input){
             const div = document.createElement("div");
 
             const icon = document.createElement("i");
-            icon.className = "material-icons";
+            icon.className = "material-icons btn-like";
+            icon.id = `like-${i}`;
             icon.innerHTML = "add_circle";
+            icon.onclick = () => likeImage(imageUrl, i);
 
             div.appendChild(icon);
             // Adding images to the screen

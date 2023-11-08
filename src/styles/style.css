@@ -189,6 +189,13 @@ button:disabled, button[disabled]{
     opacity:1;
 }
 
+.btn-like{
+    position: fixed;
+    z-index: 1000;
+    cursor: pointer;
+    font-size: 32px;
+}
+
 .snackbar {
     visibility: hidden;
     min-width: 250px;
