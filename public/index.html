@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/loader.css">
+
+    <script src="js/utils.js"></script>
+    <script src="js/config.js"></script>
+
     <title>AI Image Generator for REAL</title>
 </head>
 <body>
-    <!-- Sytem de j'aime sur les images => stocker simplement dans le local storage -->
     <div class="navbar">
         <ul class="nav">
             <li><a href="index.html" title="Home"><i class="material-icons">home</i></a></li>
@@ -26,13 +30,15 @@
         </form>
 
         <div class="result">
-            <div id="loading">Generating...</div>
-            <div id="image-grid"></div>
+            <span id="loading" class="loader"></span>
+            <div class="image-grid" id="image-grid-home"></div>
         </div>
     </div>
 
-    <div class="snackbar" id="snackbar-danger">🚫 One or more images could not be generated, retry later 🚫</div>
-    <div class="snackbar" id="snackbar-warning">📝 Type a prompt before generating images 📝</div>
+    <div class="snackbar snackbar-danger" id="snackbar-error">🚫 One or more images could not be generated, retry later 🚫</div>
+    <div class="snackbar snackbar-warning" id="snackbar-prompt">📝 Type a prompt before generating images 📝</div>
+    <div class="snackbar snackbar-danger" id="snackbar-unsaved">👾 The image is unsaved 👾</div>
+    <div class="snackbar snackbar-success" id="snackbar-saved">✨ The image is saved ✨</div>
     <script src="js/home.js"></script>
 </body>
 </html>

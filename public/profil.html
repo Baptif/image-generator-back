@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles/style.css">
+
+    <script src="js/utils.js"></script>
+    <script src="js/profil.js"></script>
+
     <title>AI Image Generator for REAL</title>
 </head>
-<body>
+<body onload="onLoadGenerateSavedImagesGrid()">
     <div class="navbar">
         <ul class="nav">
             <li><a href="index.html" title="Home"><i class="material-icons">home</i></a></li>
             <li><a href="profil.html" title="Profil"><i class="material-icons">person</i></a></li>
         </ul>
     </div>
-    <h1>In building..</h1>
+    <div class="container" id="container-profil">
+        <h1>🧑‍🎨 Your favorites images 🧑‍🎨</h1>
+        <div class="image-grid" id="image-grid-profil"></div>
+    </div>
+    <div class="snackbar snackbar-danger" id="snackbar-unsaved">😬 The image is deleted 😬</div>
 </body>
 </html>

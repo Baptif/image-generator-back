@@ -64,6 +64,10 @@ body{
     border : 1px solid rgba(0, 0, 0, 0.1);
 }
 
+#container-profil{
+    width: 60rem;
+}
+
 @media only screen and (max-width: 892px) {
     .container {
         width: 96%;
@@ -147,12 +151,6 @@ button:hover{
     border-color: transparent;
 }
 
-#loading{
-    display: none;
-    font-size: 18px;
-    margin: 10px 0;
-}
-
 button:disabled, button[disabled]{
     border: 1px solid #999;
     background-color: #ccc;
@@ -169,31 +167,48 @@ button:disabled, button[disabled]{
     align-items: center;
 }
 
-#image-grid{
+.image-grid{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
     margin-bottom: 10px;
     max-width: 100%;
 }
 
-#image-grid img{
+.image-grid img{
     max-width: 100%;
     border-radius: 10px;
     cursor: pointer;
+}
+
+#image-grid-profil{
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+#image-grid-home{
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+}
+
+#image-grid-home img{
     opacity: 0.60;
     transition: 0.5s ease;
 }
 
-#image-grid img:hover{
+#image-grid-home img:hover{
     opacity:1;
 }
 
-.btn-like{
-    position: fixed;
+.image-div{
+    position: relative;
+}
+
+.btn-icon{
+    position: absolute;
     z-index: 1000;
+    bottom: 10px;
+    right: 6.5px;
     cursor: pointer;
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .snackbar {
@@ -203,19 +218,24 @@ button:disabled, button[disabled]{
     border-radius: 5px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     top: 30px;
     font-size: 17px;
 }
 
-#snackbar-danger{
+.snackbar-danger{
     color: #fff;
     background-color: #cc281f;
 }
 
-#snackbar-warning{
+.snackbar-warning{
     color: #000;
     background-color: #ffba00;
+}
+
+.snackbar-success{
+    color: #fff;
+    background-color: rgb(22, 188, 22);
 }
 
 .snackbar.show {
